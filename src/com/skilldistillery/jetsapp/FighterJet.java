@@ -17,12 +17,16 @@ public class FighterJet extends Jet implements CombatReady {
 	
 	@Override
 	public void fight() {
-		System.out.println("I am fighting. Sidewinder missiles streak across the azure sky.");
+		System.out.println("**********");
+		System.out.println("Fighter jet " + this.getModel() + " is now engaging in a dogfight.");
+		System.out.println("Sidewinder missiles streak across the azure sky.");
+		System.out.println("**********");
 	}
 	
 	@Override
 	public void fly() {
-		System.out.println(getModel() + " : I'm flyin'!");
+		System.out.println("In flight: " + this.getModel() + " -- " + this.getSpeed() + " mph speed, " + this. getRange() + " miles range.");
+		System.out.println("Max flight time of " + this.getModel() + " is " + this.getRange() / this.getSpeed() + " hours.");
 	}
 
 	@Override

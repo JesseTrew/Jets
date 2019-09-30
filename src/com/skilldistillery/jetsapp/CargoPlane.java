@@ -17,9 +17,10 @@ public class CargoPlane extends Jet implements CargoCarrier {
 
 	@Override
 	public void fly() {
-		System.out.println(getModel() + " : I'm flyin'!");
+		System.out.println("In flight: " + this.getModel() + " -- " + this.getSpeed() + " mph speed, " + this. getRange() + " miles range.");
+		System.out.println("Max flight time of " + this.getModel() + " is " + this.getRange() / this.getSpeed() + " hours.");
 	}
-
+	
 	@Override
 	public double getSpeedInMach() {
 		// TODO Auto-generated method stub
@@ -44,7 +45,9 @@ public class CargoPlane extends Jet implements CargoCarrier {
 
 	@Override
 	public void loadCargo() {
-		System.out.println("Loading cargo");
+		System.out.println("**********");
+		System.out.println("Cargo plane " + this.getModel() + " is now loading cargo.");
+		System.out.println("**********");
 	}
 
 }

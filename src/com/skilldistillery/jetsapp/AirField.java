@@ -2,7 +2,7 @@ package com.skilldistillery.jetsapp;
 
 import java.util.List;
 
-public class AirField {
+public class Airfield {
 
 	// F i e l d s
 	
@@ -10,10 +10,10 @@ public class AirField {
 	
 	// C o n s t r u c t o r s
 	
-	public AirField() {
+	public Airfield() {
 	}
 	
-	public AirField(List<Jet> jets) {
+	public Airfield(List<Jet> jets) {
 		this.jets = jets;
 	}
 
@@ -43,7 +43,7 @@ public class AirField {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AirField other = (AirField) obj;
+		Airfield other = (Airfield) obj;
 		if (jets == null) {
 			if (other.jets != null)
 				return false;

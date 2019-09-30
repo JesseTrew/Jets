@@ -6,29 +6,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 public class JetsApplication {
 	boolean menu = true;
 	List<Jet> jets = new ArrayList<>();
-	private AirField airField;
+	private Airfield airfield = new Airfield();
 	Scanner kb = new Scanner(System.in);
 
+	
 	public static void main(String[] args) {
-		Scanner kb = new Scanner(System.in);
 		JetsApplication ja = new JetsApplication();
-//		System.out.println(jets);
-		ja.launch(kb);
-		kb.close();
+		ja.launch();
 	}
 
-	public void launch(Scanner kb) {
+	public void launch() {
 		String fileName = "jets.txt";
 		jets = readJets(fileName);
+		airfield = new Airfield(jets);
 		do {
 			displayUserMenu();
 			menuSelection(kb);
 		} while(menu);
+		kb.close();
 	}
 
 	public void displayUserMenu() {
@@ -42,37 +41,34 @@ public class JetsApplication {
 	public boolean menuSelection(Scanner kb) {
 		
 		if (kb.nextInt() == 1) {
+			kb.nextLine();
 			listFleet(jets);
 		} 
-		else if (kb.nextInt() == 2) {
-			flyJets();
+		if (kb.nextInt() == 2) {
+			kb.nextLine();
+			flyJets(jets);
 		} 
-		else if (kb.nextInt() == 3) {
+		if (kb.nextInt() == 3) {
 			viewFastest();
 		}
-		else if(kb.nextInt() == 4) {
+		if(kb.nextInt() == 4) {
 			viewLongestRange();
 		}
-		else if(kb.nextInt() == 5) {
+		if(kb.nextInt() == 5) {
 			loadCargo();
 		}
-		else if(kb.nextInt() == 6) {
+		if(kb.nextInt() == 6) {
 			dogfight();
 		}
-		else if(kb.nextInt() == 7) {
+		if(kb.nextInt() == 7) {
 			addToFleet();
 		}
-		else if(kb.nextInt() == 8) {
+		if(kb.nextInt() == 8) {
 			removeFromFleet();
 		}
-		else if(kb.nextInt() == 9) {
+		if(kb.nextInt() == 9) {
 			System.out.println("Goodbye.");
 			return false;
-		}
-		else {
-			System.err.println("Invalid input.");
-			System.out.println("Enter another selection:");
-			menuSelection(kb);
 		}
 		return true;
 	}
@@ -117,31 +113,92 @@ public class JetsApplication {
 		System.out.println();
 	}
 	
-	public void flyJets() {
-		
+	public void flyJets(List<Jet> jets) {
+		for (Jet jet : jets) {
+			jet.fly();
+		}
+		System.out.println();
 	}
 	
 	public void viewFastest() {
+		double fastestSpeed = 0;
+		int fastestIndex = 0;
+		int counter = 0;
 		
+		for (Jet jet : jets) {
+			if (jet.getSpeed() > fastestSpeed) {
+				fastestSpeed = jet.getSpeed();
+				fastestIndex = counter;
+			}
+			counter++;
+		}
+		System.out.println(jets.get(fastestIndex));
+		System.out.println();
 	}
 	
 	public void viewLongestRange() {
-
+		double longestRange = 0;
+		int longestIndex = 0;
+		int counter = 0;
+		
+		for (Jet jet : jets) {
+			if (jet.getRange() > longestRange) {
+				longestRange = jet.getRange();
+				longestIndex = counter;
+			}
+			counter++;
+		}
+		System.out.println(jets.get(longestIndex));
+		System.out.println();
 	}
 	
 	public void loadCargo() {
-		
+		for (Jet jet : jets) {
+			if(jet instanceof CargoPlane) {
+				((CargoPlane) jet).loadCargo();	
+			}
+		}
+		System.out.println();
 	}
 	
 	public void dogfight() {
-		
+		for (Jet jet : jets) {
+			if(jet instanceof FighterJet) {
+				((FighterJet) jet).fight();	
+			}
+		}
+		System.out.println();
 	}
 	
 	public void addToFleet() {
-		
+		String model;
+		double speed;
+		int range;
+		long price;
+		System.out.println("Enter the new jet's model:");
+		model = kb.next();
+		System.out.println("Enter the speed:");
+		speed = kb.nextDouble();
+		System.out.println("Enter the range:");
+		range = kb.nextInt();
+		System.out.println("Enter the price:");
+		price = kb.nextLong();
+		System.out.println();
+		JetImpl jet = new JetImpl(model, speed, range, price);
+		jets.add(jet);
+		airfield.setJets(jets);
 	}
 	
 	public void removeFromFleet() {
-		
+		System.out.println("Enter the number of the jet you want to remove:");
+		int i = 1;
+		for (Jet jet : jets) {
+			System.out.println(i + ") " + jet);
+			i++;
+		}
+
+		int selection = kb.nextInt();
+		jets.remove(selection - 1);
+		airfield.setJets(jets);
 	}
 }
