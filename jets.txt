@@ -1,5 +1,5 @@
-Jetty Jet, 600, 1000, 1000000, Standard
-Jettison Jet, 999, 2000, 15000000, Standard
+JettyJet, 600, 1000, 1000000, Standard
+JettisonJet, 999, 2000, 15000000, Standard
 FightyFightFight, 3000, 4000, 400000000, Fighter
-SlowCargo XL, 500, 8000, 750000, Cargo
-LuxJet 3000, 650, 1800, 30000000, Standard
+SlowCargoXL, 500, 8000, 750000, Cargo
+LuxJet3000, 650, 1800, 30000000, Standard

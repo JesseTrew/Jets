@@ -63,7 +63,7 @@ public abstract class Jet {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Jet [model=").append(model).append(", speed=").append(speed).append(", range=").append(range)
+		builder.append("[model=").append(model).append(", speed=").append(speed).append(", range=").append(range)
 				.append(", price=").append(price).append("]");
 		return builder.toString();
 	}

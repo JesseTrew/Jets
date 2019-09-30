@@ -11,7 +11,7 @@ public class JetsApplication {
 	boolean menu = true;
 	List<Jet> jets = new ArrayList<>();
 	private Airfield airfield = new Airfield();
-	Scanner kb = new Scanner(System.in);
+	static Scanner kb = new Scanner(System.in);
 
 	
 	public static void main(String[] args) {
@@ -22,55 +22,67 @@ public class JetsApplication {
 	public void launch() {
 		String fileName = "jets.txt";
 		jets = readJets(fileName);
-		airfield = new Airfield(jets);
+		airfield.setJets(jets);		
+		
 		do {
 			displayUserMenu();
-			menuSelection(kb);
+			menuSelection();
 		} while(menu);
+		
 		kb.close();
 	}
 
 	public void displayUserMenu() {
-		System.out.println("Welcome to the Jets Application main menu\n" + "**********************************\n"
-				+ "Please make a selection\n" + "**********************************\n" + "1) List fleet\n"
-				+ "2) Fly all jets\n" + "3) View fastest jet\n" + "4) View jet with longest range\n"
-				+ "5) Load all Cargo Jets\n" + "6) Dogfight!\n" + "7) Add a jet to Fleet\n"
-				+ "8) Remove a jet from Fleet\n" + "9) Quit");
+		System.out.println("Welcome to the Jets Application main menu\n" + 
+				"**********************************\n" + 
+				"Please make a selection\n" +
+				"**********************************\n" + 
+				"1) List fleet\n" + 
+				"2) Fly all jets\n" + 
+				"3) View fastest jet\n" + 
+				"4) View jet with longest range\n" + 
+				"5) Load all cargo jets\n" + 
+				"6) Dogfight!\n" + 
+				"7) Add a jet to the fleet\n" + 
+				"8) Remove a jet from the fleet\n" + 
+				"9) Quit");
 	}
 
-	public boolean menuSelection(Scanner kb) {
+	public void menuSelection() {
+		int selection = kb.nextInt();
 		
-		if (kb.nextInt() == 1) {
-			kb.nextLine();
-			listFleet(jets);
-		} 
-		if (kb.nextInt() == 2) {
-			kb.nextLine();
-			flyJets(jets);
-		} 
-		if (kb.nextInt() == 3) {
-			viewFastest();
+		switch (selection) {
+			case 1:
+				listFleet();
+				break;
+			case 2:
+				flyJets();
+				break;
+			case 3:
+				viewFastest();
+				break;
+			case 4:
+				viewLongestRange();
+				break;
+			case 5:
+				loadCargo();
+				break;
+			case 6:
+				dogfight();
+				break;
+			case 7:
+				addToFleet();
+				break;
+			case 8:
+				removeFromFleet();
+				break;
+			case 9:
+				System.out.println("Goodbye.");
+				System.exit(0);
+			default:
+		        System.err.println("Operation not valid.");
+		        break;
 		}
-		if(kb.nextInt() == 4) {
-			viewLongestRange();
-		}
-		if(kb.nextInt() == 5) {
-			loadCargo();
-		}
-		if(kb.nextInt() == 6) {
-			dogfight();
-		}
-		if(kb.nextInt() == 7) {
-			addToFleet();
-		}
-		if(kb.nextInt() == 8) {
-			removeFromFleet();
-		}
-		if(kb.nextInt() == 9) {
-			System.out.println("Goodbye.");
-			return false;
-		}
-		return true;
 	}
 
 	public List<Jet> readJets(String fileName) {
@@ -86,17 +98,14 @@ public class JetsApplication {
 				String type = jetRecord[4];
 				if (type.equals("Standard")) {
 					Jet j = new JetImpl(model, speed, range, price);
-//					System.out.println(j);
 					jets.add(j);
 				}
 				if (type.equals("Fighter")) {
 					Jet j = new FighterJet(model, speed, range, price);
-//					System.out.println(j);
 					jets.add(j);
 				}
 				if (type.equals("Cargo")) {
 					Jet j = new CargoPlane(model, speed, range, price);
-//					System.out.println(j);
 					jets.add(j);
 				}
 			}
@@ -106,14 +115,14 @@ public class JetsApplication {
 		return jets;
 	}
 
-	public void listFleet(List<Jet> jets) {
+	public void listFleet() {
 		for (Jet jet : jets) {
 			System.out.println(jet);
 		}
 		System.out.println();
 	}
 	
-	public void flyJets(List<Jet> jets) {
+	public void flyJets() {
 		for (Jet jet : jets) {
 			jet.fly();
 		}
@@ -175,14 +184,20 @@ public class JetsApplication {
 		double speed;
 		int range;
 		long price;
-		System.out.println("Enter the new jet's model:");
+		
+		System.out.println("Enter the new jet's model (no spaces, please):");
 		model = kb.next();
+		
 		System.out.println("Enter the speed:");
+		kb.nextLine();
 		speed = kb.nextDouble();
+		
 		System.out.println("Enter the range:");
 		range = kb.nextInt();
+		
 		System.out.println("Enter the price:");
 		price = kb.nextLong();
+		
 		System.out.println();
 		JetImpl jet = new JetImpl(model, speed, range, price);
 		jets.add(jet);
