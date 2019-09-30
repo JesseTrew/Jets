@@ -16,7 +16,7 @@ This program utilizes many of the topics and technologies that we have learned s
 ### Lessons Learned
 First, I think the UML diagrams are super useful. It really helps me keep track of everything nicely.
 
-Secondly, I do not like Scanner. Perhaps because I just don't understand it well. It gave me a lot of trouble. Reference line 188 for one example of this. I tried many different workarounds, but still the program would not like it if the 'model' String prompted on line 205 was input containing spaces. That's just one example of my issues with Scanner in this program. I'm not too worried about this, however, as I've been assured by our instructors that we won't be seeing Scanner again after a week or two from now. And the program works as is, even if it's not in the prettiest way.
+Secondly, I do not like Scanner. Perhaps because I just don't understand it well. It gave me a lot of trouble. Reference line 188 for one example of this. I tried many different workarounds, but still the program would not like it if the 'model' String prompted on line 188 was input containing spaces. That's just one example of my issues with Scanner in this program. I'm not too worried about this, however, as I've been assured by our instructors that we won't be seeing Scanner again after a week or two from now. And the program works as is, even if it's not in the prettiest way.
 
 The other important takeaways I have with this project are mostly psychological/mental. For one, I'm increasingly finding that I do very much enjoy the puzzle-solving aspect of coding. It's rewarding and satisfying intellectually to complete objectives that require some serious critical thinking.
 
